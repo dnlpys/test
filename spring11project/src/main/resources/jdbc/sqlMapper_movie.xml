@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test.com.project.movie">
+	<select id="MV_SELECT_ALL" resultType="test.com.project.movie.model.MovieVO">
+		select * from movie order by num desc
+	</select>
+	
+	<select id="MV_SELECT_ONE" resultType="test.com.project.movie.model.MovieVO">
+		select * from movie where num = #{num}
+	</select>
+	
+	
+	<select id="MV_SEARCH_LIST_TITLE" resultType="test.com.project.movie.model.MovieVO">
+		select * from movie where title like #{searchWord}
+	</select>
+	
+	<select id="MV_SEARCH_LIST_PRODUCER" resultType="test.com.project.movie.model.MovieVO">
+		select * from movie where producer like #{searchWord} 
+	</select>
+	
+	
+	
+	<insert id="MV_INSERT" parameterType="test.com.project.movie.model.MovieVO">
+		insert into movie(num,title,price,producer,save_name) 
+		values(seq_movie.nextval,#{title},#{price},#{producer},#{save_name})
+	</insert>
+	
+	<update id="MV_UPDATE" parameterType="test.com.project.movie.model.MovieVO">
+		update movie set title=#{title} , price=#{price} , 
+				producer=#{producer} , save_name=#{save_name}
+		where num = #{num}
+	</update>
+	
+	<delete id="MV_DELETE">
+		delete from movie where num = #{num}
+	</delete>
+	
+</mapper>
